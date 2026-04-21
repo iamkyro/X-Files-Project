@@ -1,0 +1,83 @@
+<!-- Security Gate - Login & Sign Up -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X-Files | Security Gate</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="matrix-bg"></div>
+
+    <div class="gate-container" id="gate">
+        <div class="flex justify-between text-[10px] text-zinc-600 mb-12 font-mono">
+            <span>NODE: X-F_TERMINAL_04</span>
+            <span>SIGNAL: ENCRYPTED [WPA-3]</span>
+        </div>
+
+        <h2 class="text-3xl font-bold text-cyan-400 mb-2 leading-tight uppercase">Security Gate: Identity Verification Required</h2>
+        <div class="h-1 w-20 bg-green-400 mb-6"></div>
+        <p class="text-[10px] tracking-widest text-zinc-500 mb-12">BUREAU OF INVESTIGATION // DIGITAL FORENSICS DIVISION</p>
+
+        <form id="loginForm" class="space-y-8">
+            <div class="space-y-2">
+                <label class="text-[10px] uppercase tracking-widest text-cyan-500/60 block">Agent ID</label>
+                <input type="text" class="terminal-input" placeholder="000-000000" required>
+            </div>
+            <div class="space-y-2">
+                <label class="text-[10px] uppercase tracking-widest text-cyan-500/60 block">Access Key</label>
+                <input type="password" class="terminal-input" placeholder="••••••••" required>
+            </div>
+
+            <button type="submit" class="glow-btn">Initiate Uplink</button>
+        </form>
+
+        <div class="mt-8 text-center">
+            <a href="register.html" class="text-[10px] tracking-widest text-cyan-400 hover:text-white transition">NEW AGENT? [REQUEST_ENLISTMENT]</a>
+        </div>
+
+        <div class="mt-16 flex flex-col items-center">
+            <p class="text-[9px] uppercase tracking-widest text-zinc-600 mb-4">Authenticate Via Encrypted Channels</p>
+            <div class="flex gap-4">
+                <button class="w-10 h-10 border border-zinc-800 flex items-center justify-center hover:border-cyan-400 transition">
+                    <svg class="w-4 h-4 fill-zinc-500" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                </button>
+                <button class="w-10 h-10 border border-zinc-800 flex items-center justify-center hover:border-cyan-400 transition">
+                    <svg class="w-4 h-4 fill-zinc-500" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                </button>
+            </div>
+        </div>
+
+        <div class="mt-12 flex justify-between items-center text-[9px] text-zinc-600 font-mono">
+            <div class="flex items-center gap-2">
+                <div class="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_5px_#22c55e]"></div>
+                <span>SYSTEM OPERATIONAL</span>
+            </div>
+            <span>V. 2.94.1.0-A</span>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('loginForm');
+        const gate = document.getElementById('gate');
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            gate.classList.add('red-alert');
+            
+            const errorMsg = document.createElement('div');
+            errorMsg.className = 'absolute inset-0 flex items-center justify-center bg-black/80 text-red-500 font-bold tracking-[0.5em] text-sm crt-flicker z-50';
+            errorMsg.innerHTML = 'UNAUTHORIZED ACCESS DETECTED';
+            gate.appendChild(errorMsg);
+
+            setTimeout(() => {
+                gate.classList.remove('red-alert');
+                errorMsg.remove();
+            }, 3000);
+        });
+    </script>
+</body>
+</html>
