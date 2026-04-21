@@ -10,7 +10,6 @@
         :root { --cyan: #00ffff; }
         body {
             background-color: #050505;
-            /* Sửa lại tên font trong CSS */
             font-family: 'Space Grotesk', sans-serif;
             color: #ffffff;
             min-height: 100vh;
@@ -35,23 +34,16 @@
             padding: 2.5rem;
             box-shadow: 0 0 50px rgba(0,0,0,1);
             position: relative;
-            border-left: 1px solid rgba(0, 255, 255, 0.1);
-            border-right: 1px solid rgba(0, 255, 255, 0.1);
         }
         .terminal-input {
             width: 100%;
-            background: rgba(0, 255, 255, 0.05); /* Thêm nền tối nhẹ để dễ nhìn ô nhập */
+            background: rgba(0, 255, 255, 0.05);
             border: none;
             border-bottom: 1px solid rgba(0, 255, 255, 0.3);
             padding: 0.75rem 0.5rem;
             color: var(--cyan);
             font-family: monospace;
             outline: none;
-            transition: 0.3s;
-        }
-        .terminal-input:focus {
-            border-bottom-color: var(--cyan);
-            background: rgba(0, 255, 255, 0.1);
         }
         .glow-btn {
             background: var(--cyan);
@@ -62,32 +54,27 @@
             letter-spacing: 0.2em;
             text-transform: uppercase;
             margin-top: 1.5rem;
-            transition: 0.3s;
             cursor: pointer;
         }
-        .glow-btn:hover {
-            background: #fff;
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
-        }
-        .red-alert { animation: alert-flash 0.5s infinite; }
-        @keyframes alert-flash {
-            0%, 100% { background: rgba(15, 15, 15, 0.95); }
-            50% { background: rgba(60, 0, 0, 0.95); }
-        }
+        .glow-btn:hover { background: #fff; box-shadow: 0 0 20px rgba(0, 255, 255, 0.6); }
     </style>
 </head>
 <body>
-    <div class="matrix-bg"></div>
+    <div class="fixed top-6 left-6 z-50">
+        <a href="index.html" class="flex items-center gap-2 text-[10px] tracking-[0.3em] text-cyan-400/60 hover:text-cyan-400 transition-all group">
+            <span class="border border-cyan-400/40 px-2 py-1 group-hover:border-cyan-400 group-hover:bg-cyan-400/10 font-mono">
+                [ ESC_TO_MAIN ]
+            </span>
+        </a>
+    </div>
 
+    <div class="matrix-bg"></div>
     <div class="gate-container" id="gate">
-        <div class="flex justify-between text-[9px] text-zinc-500 mb-8 font-mono uppercase tracking-widest">
+        <div class="flex justify-between text-[9px] text-zinc-500 mb-8 font-mono tracking-widest">
             <span>NODE: X-F_TERMINAL_04</span>
             <span>SIGNAL: ENCRYPTED</span>
         </div>
-
-        <h2 class="text-2xl font-bold text-cyan-400 mb-2 leading-tight uppercase tracking-tighter">Security Gate: Identity Verification</h2>
-        <div class="h-1 w-12 bg-green-500 mb-6"></div>
-        
+        <h2 class="text-2xl font-bold text-cyan-400 mb-6 uppercase tracking-tighter">Security Gate: Identity Verification</h2>
         <form id="loginForm" class="space-y-6">
             <div class="space-y-1">
                 <label class="text-[10px] uppercase tracking-[0.2em] text-cyan-500/60">Agent ID</label>
@@ -99,40 +86,9 @@
             </div>
             <button type="submit" class="glow-btn">Initiate Uplink</button>
         </form>
-
         <div class="mt-8 text-center">
             <a href="register.html" class="text-[10px] tracking-[0.2em] text-cyan-400 hover:text-white transition">NEW AGENT? [REQUEST_ENLISTMENT]</a>
         </div>
-
-        <div class="mt-10 flex justify-between items-center text-[9px] text-zinc-600 font-mono border-t border-zinc-800 pt-6">
-            <div class="flex items-center gap-2">
-                <div class="w-1.5 h-1.5 rounded-full bg-green-500 shadow-[0_0_5px_#22c55e]"></div>
-                <span>SYSTEM ONLINE</span>
-            </div>
-            <span>V. 2.94.1.0-A</span>
-        </div>
     </div>
-
-    <script>
-        const form = document.getElementById('loginForm');
-        const gate = document.getElementById('gate');
-
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            gate.classList.add('red-alert');
-            
-            const errorMsg = document.createElement('div');
-            errorMsg.className = 'absolute inset-0 flex items-center justify-center bg-black/90 text-red-500 font-bold tracking-[0.3em] text-xs z-50 text-center px-4';
-            errorMsg.innerHTML = 'UNAUTHORIZED ACCESS DETECTED<br>IP LOGGED BY BUREAU';
-            gate.appendChild(errorMsg);
-
-            setTimeout(() => {
-                gate.classList.remove('red-alert');
-                errorMsg.remove();
-                // Sơn có thể thêm chuyển trang sau khi thông báo biến mất nếu muốn:
-                // window.location.href = "index.html"; 
-            }, 2500);
-        });
-    </script>
 </body>
 </html>
